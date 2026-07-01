@@ -1,0 +1,13 @@
+STUDENT_ID || NAME || AGE || GRADE
+1 : Mary : 8 : 3a
+2 : John : 12 : 6a
+5 : Max : 10 : 5a
+
+COURSE_CODE || COURSE_NAME || COURSE_CREDITS
+MAT2419 | Math | 11
+5
+2
+SCI2410 | Science | 10
+1
+SS2101 | Social Science | 8
+CIV2341 | Civics | 8
