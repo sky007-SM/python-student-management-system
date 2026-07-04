@@ -156,7 +156,7 @@ class School:
             else:
                 break
         while True:
-            grade: str = input("Enter the grade of student: ").strip()
+            grade: str = input("Enter the grade of student: ").strip().upper()
             if search(
                 r"^\d{1,2}[a-zA-Z0-9]$", grade
             ):  # regex format check to validate grade
@@ -229,7 +229,7 @@ class School:
                 else:
                     break
             if not modify_record:
-                print("======= Search results =======\n")
+                print("\n======= Search results =======\n")
             index: int
             for index in range(len(self.students)):
                 if self.students[index].student_id == student_id:
@@ -242,7 +242,7 @@ class School:
 
         elif attribute_type == "2":
             student_name: str = input("Enter Student Name: ").title().strip()
-            print("======= Search results =======\n")
+            print("\n======= Search results =======\n")
             index: int
             for index in range(len(self.students)):
                 if self.students[index].name.startswith(student_name):
@@ -267,16 +267,7 @@ class School:
         # Condition to ensure search returned result
         if index is not None:
             if choice == "1":
-                while True:
-                    new_grade: str = input("Enter the grade of student: ").strip()
-                    if search(
-                        r"^\d{1,2}[a-zA-Z0-9]$", new_grade
-                    ):  # regex format check to validate grade
-                        break
-                    else:
-                        print(
-                            "Error: Invalid format. Grade must be 1 or 2 digits followed by 1 Letter (e.g., 8B, 10A)."
-                        )
+                new_grade: str = str(int(self.students[index].grade[:-1]) + 1) + self.students[index].grade[-1:].upper()
                 self.students[index].grade = new_grade
                 print(
                     f"The grade of student {self.students[index].name} has been updated to {new_grade}"
@@ -361,6 +352,7 @@ class School:
                     if self.students[index].student_id not in course.course_students:
                         course.course_students.append(self.students[index].student_id)
                         course_added = True
+                        print(f"The student {self.students[index].name} has been enrolled in {course.course_name}")
                     else:
                         print("Student already enrolled for aforementioned course")
             if not course_added:
@@ -448,8 +440,10 @@ class School:
             elif choice == "5":
                 permission: str = input("Do you want to view is admin enter KEY: ")
                 if permission == KEY:
+                    print("Password Matched: Admin view enabled\n")
                     self.view_courses(True)
                 else:
+                    print("Password does not match: Admin view disabled\n")
                     self.view_courses(False)
             elif choice == "6":
                 self.search_student(False)
